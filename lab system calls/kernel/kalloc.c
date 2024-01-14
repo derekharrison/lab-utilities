@@ -10,8 +10,6 @@
 #include "defs.h"
 #include "sysinfo.h"
 
-int numbytes = PHYSTOP - KERNBASE;
-
 void freerange(void *pa_start, void *pa_end);
 
 extern char end[]; // first address after kernel.
@@ -63,8 +61,6 @@ kfree(void *pa)
   r->next = kmem.freelist;
   kmem.freelist = r;
   release(&kmem.lock);
-
-  numbytes = numbytes + 4096;
 }
 
 // Allocate one 4096-byte page of physical memory.
@@ -84,12 +80,11 @@ kalloc(void)
   if(r)
     memset((char*)r, 5, PGSIZE); // fill with junk
 
-  numbytes = numbytes - 4096;
-
   return (void*)r;
 }
 
-int getbytes(void) {
+int 
+getbytes(void) {
 
   int nbytes = 0;
 
@@ -101,9 +96,4 @@ int getbytes(void) {
   }
 
   return nbytes;
-}
-
-int getb(void) {
-  
-  return numbytes;
 }
