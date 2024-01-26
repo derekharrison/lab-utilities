@@ -107,8 +107,6 @@ struct proc {
   int ticks;
   int ainterv;
   uint64 handler;
-  enum procstate statesv;        // Process state save
   struct trapframe *trapframesv;  // Save registers
-  struct context contextsv;      // swtch() here to run process
-  int hfl;
+  int hfl;                     // Handler flag to prevent repeating calls
 };

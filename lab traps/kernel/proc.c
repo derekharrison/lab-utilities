@@ -700,15 +700,3 @@ procdump(void)
     printf("\n");
   }
 }
-
-void func() {
-
-  printf("printing in func\n");
-}
-
-int 
-save() {
-
-
-  return 0;
-}
